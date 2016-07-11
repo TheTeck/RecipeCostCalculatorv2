@@ -1,0 +1,17 @@
+*.apk
+*.ap_
+*.dex
+
+bin/
+gen/
+
+*.iml
+.gradle/
+build/
+
+local.properties
+.idea/workspace.xml
+.idea/libraries
+.idea/tasks.xml
+.idea/datasources.xml
+.idea/datasources.ids

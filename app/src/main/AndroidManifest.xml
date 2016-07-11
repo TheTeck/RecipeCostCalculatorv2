@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.teckemeyer.recipecostcalculatorv2">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_flower_192"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Credits"
+            android:label="Credits"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".SelectedRecipe"
+            android:label="View Recipe"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".IngredientDatabase"
+            android:label="Pantry"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".NewIngredient"
+            android:label="Add Ingredient to Pantry"
+            android:parentActivityName=".IngredientDatabase"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".NewRecipe"
+            android:label="Create New Recipe"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".AddToRecipe"
+            android:label="Add Ingredient to Recipe"
+            android:parentActivityName=".NewRecipe"
+            android:screenOrientation="portrait"></activity>
+    </application>
+
+</manifest>

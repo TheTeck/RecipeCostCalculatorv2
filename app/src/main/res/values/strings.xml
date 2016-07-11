@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">Recipe Cost Calculator</string>
+    <string name="ok">OK</string>
+    <string name="ingredient_database">Pantry</string>
+    <string name="your_recipes">Your Recipes</string>
+    <string name="create_recipe">Create Recipe</string>
+    <string name="add_recipe">Add Recipe</string>
+    <string name="add_to_recipe">Add Ingredient To Recipe</string>
+    <string name="create_ingredient">Create Ingredient</string>
+    <string name="ingredient">ingredient name</string>
+    <string name="select_icon">Select Icon:</string>
+    <string name="amount">Amount:</string>
+    <string name="cost">Cost:</string>
+    <string name="unit">Unit:</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="name">Name:</string>
+    <string name="nameWarning">Need to enter a name!</string>
+    <string name="amountWarning">Need to enter valid amount!</string>
+    <string name="costWarning">Need to enter valid cost!</string>
+    <string name="recipe_book_warning">No recipes to show yet...</string>
+    <string name="select_ingredient">Select From Pantry:</string>
+    <string name="total_cost">Total Cost: </string>
+    <string name="view_recipe">View Recipe</string>
+    <string name="no_ingredients">You cannot create a recipe yet! You must first put ingredients in the Pantry.</string>
+    <string name="return_to_recipes">Return To Your Recipes</string>
+    <string name="boogscorcher">Boogscorcher Software</string>
+    <string name="credits">Credits</string>
+    <string name="credits_info1">Programmed by\nJohn Teckemeyer</string>
+    <string name="credits_info2">Additional credit for icons goes to Hand-Drawn Goods (handdrawngoods.com)</string>
+    <string name="credit_thanks">Thanks you for downloading "Recipe Cost Calculator". This program was made to fill a gap I saw in the marketplace for a simple tool that reflected a real world use of ingredients and their reusability for many recipes. I hope you enjoy it as much as I do. Thanks again!</string>
+
+    <string-array name="spinner_options">
+        <item>units</item>
+        <item>ounces</item>
+        <item>pounds</item>
+        <item>milligrams</item>
+        <item>grams</item>
+        <item>kilograms</item>
+        <item>liquid ounces</item>
+        <item>teaspoons</item>
+        <item>tablespoons</item>
+        <item>cups</item>
+        <item>pints</item>
+        <item>quarts</item>
+        <item>half-gallon</item>
+        <item>gallons</item>
+        <item>milliliters</item>
+        <item>liters</item>
+    </string-array>
+
+    <string-array name="units">
+        <item>units</item>
+    </string-array>
+
+    <string-array name="weight">
+        <item>ounces</item>
+        <item>pounds</item>
+    </string-array>
+
+    <string-array name="weight_metric">
+        <item>milligrams</item>
+        <item>grams</item>
+        <item>kilograms</item>
+    </string-array>
+
+    <string-array name="volume">
+        <item>liquid ounces</item>
+        <item>teaspoons</item>
+        <item>tablespoons</item>
+        <item>cups</item>
+        <item>pints</item>
+        <item>quarts</item>
+        <item>half-gallon</item>
+        <item>gallons</item>
+        <item>milliliters</item>
+        <item>liters</item>
+    </string-array>
+
+
+    <string-array name="spinner_amount">
+        <item>1</item>
+        <item>1/2</item>
+        <item>1/3</item>
+        <item>1/4</item>
+        <item>1/6</item>
+        <item>1/8</item>
+    </string-array>
+
+    <string name="title_activity_splash_fullscreen">SplashFullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>

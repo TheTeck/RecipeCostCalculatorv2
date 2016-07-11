@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.teckemeyer.recipecostcalculatorv2.MainActivity"
+    android:clickable="false"
+    android:background="@drawable/my_gradient">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/your_recipes"
+        android:id="@+id/textViewYourRecipes"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:textColor="#ffffff" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listViewBook"
+        android:choiceMode="singleChoice"
+        android:layout_above="@+id/layoutButtons"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/textViewYourRecipes" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/recipe_book_warning"
+        android:id="@+id/txtBookWarning"
+        android:textColor="#ff0000"
+        android:visibility="invisible"
+        android:layout_alignTop="@+id/listViewBook"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutButtons"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ingredient_database"
+            android:id="@+id/btnIngredientDatabase"
+            android:onClick="goToIngredientDatabase"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/btnCreateRecipe"
+            android:layout_toLeftOf="@+id/btnCreateRecipe"
+            android:layout_weight=".5"
+            android:background="@drawable/my_gradient4"
+            android:textColor="#ffffff"
+            android:layout_marginTop="15dp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/create_recipe"
+            android:id="@+id/btnCreateRecipe"
+            android:layout_alignTop="@+id/btnIngredientDatabase"
+            android:layout_alignRight="@+id/listViewBook"
+            android:layout_alignEnd="@+id/listViewBook"
+            android:layout_weight=".5"
+            android:background="@drawable/my_gradient3"
+            android:textColor="#ffffff"
+            android:layout_marginTop="15dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivCredits"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_info_outline_white_18dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textViewSplash"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="#000000"
+        android:visibility="visible" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageViewFlowerPurple"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/flower_purple" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageViewFlowerGreen"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/flower_green"
+        android:visibility="visible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/app_name"
+        android:id="@+id/txtApp"
+        android:layout_alignBottom="@+id/txtBookWarning"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/boogscorcher"
+        android:id="@+id/txtCompany"
+        android:textColor="#c794e5"
+        android:layout_above="@+id/layoutButtons"
+        android:layout_alignRight="@+id/txtBookWarning"
+        android:layout_alignEnd="@+id/txtBookWarning" />
+
+</RelativeLayout>
