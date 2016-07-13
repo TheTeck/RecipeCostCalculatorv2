@@ -51,6 +51,7 @@ public class NewIngredient extends AppCompatActivity {
         final EditText etName = (EditText) findViewById(R.id.etName);
         final EditText etAmount = (EditText) findViewById(R.id.etAmount);
         final EditText etCost = (EditText) findViewById(R.id.etCost);
+        final EditText etYield = (EditText) findViewById(R.id.editYield);
         final Button btnSubmit = (Button) findViewById(R.id.btnSubmit);
         Button btnCancel = (Button) findViewById(R.id.btnCancel);
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -251,6 +252,21 @@ public class NewIngredient extends AppCompatActivity {
                     txtCostWarning.setVisibility(View.INVISIBLE);
                 }
 
+                int mYield = 100;
+                try {
+                    if (etYield.getText().toString().trim() != null) {
+                        mYield = Integer.parseInt(etYield.getText().toString().trim());
+                    }
+                } catch (NumberFormatException e) {
+                    mYield = 100;
+                }
+
+                if (mYield < 0) {
+                    mYield = 0;
+                } else if (mYield > 100) {
+                    mYield = 100;
+                }
+
                 if (!mError){
                     // Create a new ingredient
                     Ingredient ingredient = new Ingredient();
@@ -263,6 +279,7 @@ public class NewIngredient extends AppCompatActivity {
                     ingredient.setIcon(mIcon);
                     ingredient.setName(mName);
                     ingredient.setCost(mCost);
+                    ingredient.setYield(mYield);
 
                     theIngredients.add(ingredient);
 

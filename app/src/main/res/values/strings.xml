@@ -11,6 +11,7 @@
     <string name="select_icon">Select Icon:</string>
     <string name="amount">Amount:</string>
     <string name="cost">Cost:</string>
+    <string name="yield">Yield:</string>
     <string name="unit">Unit:</string>
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>

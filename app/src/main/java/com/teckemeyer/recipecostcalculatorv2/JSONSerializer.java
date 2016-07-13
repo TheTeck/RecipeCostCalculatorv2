@@ -144,4 +144,35 @@ public class JSONSerializer {
         return ingredientList;
     }
 
+    public ArrayList<OldIngredient> loadOldPantry() throws IOException, JSONException {
+
+        ArrayList<OldIngredient> ingredientList = new ArrayList<OldIngredient>();
+        BufferedReader reader = null;
+
+        try {
+            InputStream in = mContext.openFileInput(mFilename);
+            reader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder jsonString = new StringBuilder();
+            String line = null;
+
+            while ((line = reader.readLine()) != null) {
+                jsonString.append(line);
+            }
+
+            JSONArray jArray = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
+
+            for (int i = 0; i < jArray.length(); i++) {
+                ingredientList.add(new OldIngredient(jArray.getJSONObject(i)));
+            }
+        } catch (FileNotFoundException e) {
+            Log.i("Error", "file not found");
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+
+        return ingredientList;
+    }
+
 }

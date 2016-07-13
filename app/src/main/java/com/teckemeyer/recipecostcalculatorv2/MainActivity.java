@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     TextView mCompany;
     Typeface typeFace;
     ImageView mCredits;
+    boolean mUpdated;
 
     private int mMessageCode;
 
@@ -87,6 +89,44 @@ public class MainActivity extends AppCompatActivity {
         mCreateRecipe.setTypeface(typeFace);
         mApp.setTypeface(typeFace);
         mCompany.setTypeface(typeFace);
+
+        mUpdated = prefs.getBoolean("updatedIngredient", false);
+
+        if (!mUpdated) {
+            JSONSerializer mSerializer;
+            ArrayList<OldIngredient> ingredientList = new ArrayList<>();
+            ArrayList<Ingredient> newList = new ArrayList<>();
+
+            mSerializer = new JSONSerializer("RecipeCostCalculatorData.json", MainActivity.this.getApplicationContext());
+
+            try {
+                ingredientList = mSerializer.loadOldPantry();
+
+                for (int i = 0; i < ingredientList.size(); i++) {
+                    Ingredient conversion = new Ingredient();
+
+                    conversion.setName(ingredientList.get(i).getName());
+                    conversion.setAmount(ingredientList.get(i).getAmount());
+                    conversion.setAmountDivider(ingredientList.get(i).getAmountDivider());
+                    conversion.setCost((float)ingredientList.get(i).getCost());
+                    conversion.setUnit(ingredientList.get(i).getUnit());
+                    conversion.setIcon(ingredientList.get(i).getIcon());
+                    conversion.setYield(100);
+
+                    newList.add(conversion);
+                }
+            } catch (Exception e) {
+                Toast.makeText(MainActivity.this, "Error converting ingredients!", Toast.LENGTH_LONG).show();
+            }
+
+            try {
+                mSerializer.savePantry(newList);
+            } catch (Exception e) {
+                Toast.makeText(MainActivity.this, "Error saving converted ingredients!", Toast.LENGTH_LONG).show();
+            }
+
+            editor.putBoolean("updatedIngredient", true);
+        }
 
         mMessageCode = prefs.getInt("messageCode", 0);
         editor.putInt("messageCode", mMessageCode);

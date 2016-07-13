@@ -88,6 +88,7 @@ public class AddToRecipe extends AppCompatActivity {
         mIngredientUsed.setAmountDivider(theIngredients.get(0).getAmountDivider());
         mIngredientUsed.setUnit(theIngredients.get(0).getUnit());
         mIngredientUsed.setCost((float) theIngredients.get(0).getCost());
+        mIngredientUsed.setYield(theIngredients.get(0).getYield());
 
         prefs = getSharedPreferences("Recipe Cost Calculator", MODE_PRIVATE);
 
@@ -172,6 +173,7 @@ public class AddToRecipe extends AppCompatActivity {
                 mIngredientUsed.setAmountDivider(theIngredients.get(position).getAmountDivider());
                 mIngredientUsed.setUnit(theIngredients.get(position).getUnit());
                 mIngredientUsed.setCost((float) theIngredients.get(position).getCost());
+                mIngredientUsed.setYield(theIngredients.get(position).getYield());
 
                 // Update the spinner with appropriate entries
                 tempString = mIngredientUsed.getUnit().trim();

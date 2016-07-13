@@ -235,7 +235,7 @@ public class NewRecipe extends AppCompatActivity {
             // Calculates ingredients based in units
             if (ip.getUsedUnit().equals("units")) {
                 // Cost per unit
-                float initialCost = (float)ip.getIngredient().getCost() / ip.getIngredient().getAmount();
+                float initialCost = ((float)ip.getIngredient().getCost() / ((float)ip.getIngredient().getYield() / 100f)) / ip.getIngredient().getAmount();
                 float newCost = initialCost * ip.getUsedAmount() / ip.getUsedAmountDivider();
 
                 return newCost;
@@ -249,7 +249,7 @@ public class NewRecipe extends AppCompatActivity {
                 } else {
                     divisor = 16;
                 }
-                float initialCost = (float) ip.getIngredient().getCost() / (divisor * ip.getIngredient().getAmount());
+                float initialCost = ((float)ip.getIngredient().getCost() / ((float)ip.getIngredient().getYield() / 100f)) / (divisor * ip.getIngredient().getAmount());
 
                 int multiplier;
                 if (ip.getUsedUnit().equals("ounces")) {
@@ -271,7 +271,7 @@ public class NewRecipe extends AppCompatActivity {
                     divisor = 1000;
                 }
 
-                float initialCost = (float) ip.getIngredient().getCost() / (divisor * ip.getIngredient().getAmount());
+                float initialCost = ((float)ip.getIngredient().getCost() / ((float)ip.getIngredient().getYield() / 100f)) / (divisor * ip.getIngredient().getAmount());
 
                 if (ip.getIngredient().getUnit().equals("milligrams")) {
                     initialCost *= 1000;
@@ -333,7 +333,7 @@ public class NewRecipe extends AppCompatActivity {
                         divisor = 1;
                         break;
                 }
-                float initialCost = (float)ip.getIngredient().getCost() / (divisor * ip.getIngredient().getAmount());
+                float initialCost = ((float)ip.getIngredient().getCost() / ((float)ip.getIngredient().getYield() / 100f)) / (divisor * ip.getIngredient().getAmount());
 
                 float multiplier;
                 switch (ip.getUsedUnit()) {

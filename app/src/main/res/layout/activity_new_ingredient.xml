@@ -86,7 +86,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textColor="#ffffff"
-            android:paddingTop="15dp"
+            android:paddingTop="10dp"
             android:layout_marginRight="20dp"
             android:textStyle="bold" />
 
@@ -232,7 +232,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/txtCostWarning">
+            android:layout_below="@+id/ingredient_yield"
+            android:id="@+id/relativeLayout2">
 
             <Button
                 android:layout_width="wrap_content"
@@ -263,6 +264,41 @@
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/yield"
+            android:id="@+id/ingredient_yield"
+            android:layout_below="@+id/txtCost"
+            android:layout_alignParentStart="true"
+            android:paddingTop="20dp"
+            android:textColor="#ffffff"
+            android:layout_marginRight="20dp" />
+
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editYield"
+            android:textColor="#fecd7e"
+            android:text="100"
+            android:paddingTop="25dp"
+            android:layout_alignTop="@+id/ingredient_yield"
+            android:layout_alignStart="@+id/spinner" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="%"
+            android:id="@+id/textView"
+            android:layout_toEndOf="@+id/editYield"
+            android:textColor="#fecd7e"
+            android:paddingBottom="10dp"
+            android:layout_alignBottom="@+id/editYield" />
 
     </RelativeLayout>
 </LinearLayout>

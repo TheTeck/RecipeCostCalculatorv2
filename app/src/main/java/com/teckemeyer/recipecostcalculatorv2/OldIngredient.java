@@ -4,9 +4,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by John on 6/8/2016.
+ * Created by John on 7/11/2016.
  */
-public class Ingredient {
+public class OldIngredient {
 
     // Class Members
     private String mName;
@@ -15,7 +15,6 @@ public class Ingredient {
     private String mUnit;
     private int mIcon = 1;
     private double mCost = 1f;
-    private int mYield = 100;
 
     private static final String JSON_INGREDIENT_NAME = "ingredient_name";
     private static final String JSON_INGREDIENT_UNIT = "ingredient_unit";
@@ -23,24 +22,22 @@ public class Ingredient {
     private static final String JSON_INGREDIENT_AMOUNT_DIVIDER = "ingredient_amount_divider";
     private static final String JSON_INGREDIENT_ICON = "ingredient_icon";
     private static final String JSON_INGREDIENT_COST = "ingredient_cost";
-    private static final String JSON_INGREDIENT_YIELD = "ingredient_yield";
 
     // Constructors
 
     // Constructor used when called with a JSONObject
-    public Ingredient (JSONObject jo) throws JSONException {
+    public OldIngredient (JSONObject jo) throws JSONException {
         mName = jo.getString(JSON_INGREDIENT_NAME);
         mUnit = jo.getString(JSON_INGREDIENT_UNIT);
         mAmount = jo.getInt(JSON_INGREDIENT_AMOUNT);
         mAmountDivider = jo.getInt(JSON_INGREDIENT_AMOUNT_DIVIDER);
         mIcon = jo.getInt(JSON_INGREDIENT_ICON);
         mCost = jo.getDouble(JSON_INGREDIENT_COST);
-        mYield = jo.getInt(JSON_INGREDIENT_YIELD);
 
     }
 
     // Default constructor for when we create a note
-    public Ingredient () {
+    public OldIngredient () {
         // Nothing to do here
     }
 
@@ -56,7 +53,6 @@ public class Ingredient {
         jo.put(JSON_INGREDIENT_UNIT, mUnit);
         jo.put(JSON_INGREDIENT_AMOUNT, mAmount);
         jo.put(JSON_INGREDIENT_AMOUNT_DIVIDER, mAmountDivider);
-        jo.put(JSON_INGREDIENT_YIELD, mYield);
 
         return jo;
     }
@@ -107,13 +103,5 @@ public class Ingredient {
 
     public void setAmountDivider(int mAmountDivider) {
         this.mAmountDivider = mAmountDivider;
-    }
-
-    public int getYield() {
-        return mYield;
-    }
-
-    public void setYield(int mYield) {
-        this.mYield = mYield;
     }
 }
