@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         mUpdated = prefs.getBoolean("updatedIngredient", false);
 
+        // Converts saved data to new schema
         if (!mUpdated) {
             JSONSerializer mSerializer;
             ArrayList<OldIngredient> ingredientList = new ArrayList<>();

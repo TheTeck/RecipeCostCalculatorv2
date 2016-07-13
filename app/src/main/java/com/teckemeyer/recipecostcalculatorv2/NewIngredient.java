@@ -1,5 +1,6 @@
 package com.teckemeyer.recipecostcalculatorv2;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -32,6 +33,7 @@ public class NewIngredient extends AppCompatActivity {
     private boolean mError = false;
     float mAlpha = 0.4f;
     private int mMessageCode;
+    private Intent intent;
 
     Typeface typeFace;
 
@@ -54,6 +56,7 @@ public class NewIngredient extends AppCompatActivity {
         final EditText etYield = (EditText) findViewById(R.id.editYield);
         final Button btnSubmit = (Button) findViewById(R.id.btnSubmit);
         Button btnCancel = (Button) findViewById(R.id.btnCancel);
+        final ImageView ivYieldHelp = (ImageView) findViewById(R.id.yieldHelp);
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         final TextView txtNameWarning = (TextView) findViewById(R.id.txtNameWarning);
         final TextView txtAmountWarning = (TextView) findViewById(R.id.txtAmountWarning);
@@ -184,6 +187,15 @@ public class NewIngredient extends AppCompatActivity {
                 ivIcon4.setAlpha(mAlpha);
                 ivIcon5.setAlpha(mAlpha);
                 ivIcon6.setAlpha(1f);
+            }
+        });
+
+        // Handle clicks on help icon for "yield"
+        ivYieldHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(NewIngredient.this, YieldInfo.class);
+                startActivity(intent);
             }
         });
 

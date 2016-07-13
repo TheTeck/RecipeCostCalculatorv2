@@ -300,5 +300,15 @@
             android:paddingBottom="10dp"
             android:layout_alignBottom="@+id/editYield" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/yieldHelp"
+            android:layout_alignBottom="@+id/editYield"
+            android:layout_toEndOf="@+id/textView"
+            android:src="@drawable/ic_help_outline_white_24dp"
+            android:paddingBottom="10dp"
+            android:layout_marginLeft="20dp" />
+
     </RelativeLayout>
 </LinearLayout>

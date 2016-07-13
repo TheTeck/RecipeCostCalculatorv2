@@ -30,6 +30,7 @@
     <string name="credits_info1">Programmed by\nJohn Teckemeyer</string>
     <string name="credits_info2">Additional credit for icons goes to Hand-Drawn Goods (handdrawngoods.com)</string>
     <string name="credit_thanks">Thanks you for downloading "Recipe Cost Calculator". This program was made to fill a gap I saw in the marketplace for a simple tool that reflected a real world use of ingredients and their reusability for many recipes. I hope you enjoy it as much as I do. Thanks again!</string>
+    <string name="yield_info">The yield percentage for an ingredient represents how much of that ingredient is actually usable after trimming it. For example, if you were to prepare carrots, you may find that it only has a 85% yield after cutting off the top and peeling it. Whereas flour will have a 100% yield, since you don\'t have to prepare it further. To have an accurate cost calculation, the yield percentage should be set for the ingredients.</string>
 
     <string-array name="spinner_options">
         <item>units</item>
