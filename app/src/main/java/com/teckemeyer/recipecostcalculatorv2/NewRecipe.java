@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -277,6 +278,8 @@ public class NewRecipe extends AppCompatActivity {
                     initialCost *= 1000;
                 }
 
+                Log.i("Initial Cost", String.valueOf(((float)ip.getIngredient().getCost() / ((float)ip.getIngredient().getYield() / 100f)) / (divisor * ip.getIngredient().getAmount())));
+
                 int multiplier;
                 if (ip.getUsedUnit().equals("milligrams") || ip.getUsedUnit().equals("grams")) {
                     multiplier = 1;
@@ -292,6 +295,8 @@ public class NewRecipe extends AppCompatActivity {
                 if (newCost <= 0.01f) {
                     newCost = 0.01f;
                 }
+
+                Log.i("New Cost", String.valueOf(initialCost * ip.getUsedAmount() * multiplier / ip.getUsedAmountDivider()));
 
                 return newCost;
 
@@ -334,6 +339,7 @@ public class NewRecipe extends AppCompatActivity {
                         break;
                 }
                 float initialCost = ((float)ip.getIngredient().getCost() / ((float)ip.getIngredient().getYield() / 100f)) / (divisor * ip.getIngredient().getAmount());
+                Log.i("Initial Cost", String.valueOf(((float)ip.getIngredient().getCost() / ((float)ip.getIngredient().getYield() / 100f)) / (divisor * ip.getIngredient().getAmount())));
 
                 float multiplier;
                 switch (ip.getUsedUnit()) {
@@ -372,6 +378,8 @@ public class NewRecipe extends AppCompatActivity {
                         break;
                 }
                 float newCost = initialCost * ip.getUsedAmount() * multiplier / ip.getUsedAmountDivider();
+
+                Log.i("New Cost", String.valueOf(initialCost * ip.getUsedAmount() * multiplier / ip.getUsedAmountDivider()));
 
                 return newCost;
             }

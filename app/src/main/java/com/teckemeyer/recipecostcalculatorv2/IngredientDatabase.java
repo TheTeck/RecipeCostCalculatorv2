@@ -83,7 +83,6 @@ public class IngredientDatabase extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredient_database);
 
-
         typeFace = Typeface.createFromAsset(getAssets(), "fonts/AlegreyaSans-Medium.ttf");
 
         mAddIcon = (ImageView) findViewById(R.id.imageViewAdd);
@@ -108,6 +107,18 @@ public class IngredientDatabase extends AppCompatActivity {
                 view.startAnimation(mLeftOut);
                 mIngredientAdapter.deleteIngredient(position);
                 return true;
+            }
+        });
+
+        // Handle click on list item to edit ingredient
+        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                EditIngredient.setSelected(mIngredientAdapter.getFinalList().get(position));
+                Toast.makeText(IngredientDatabase.this, "EditIngredient.setSelected() called with (" + position + ")", Toast.LENGTH_SHORT).show();
+
+                intent = new Intent(IngredientDatabase.this, EditIngredient.class);
+                startActivity(intent);
             }
         });
 
@@ -176,6 +187,10 @@ public class IngredientDatabase extends AppCompatActivity {
             } catch (Exception e) {
                 Toast.makeText(IngredientDatabase.this, "Error loading ingredients!", Toast.LENGTH_LONG).show();
             }
+        }
+
+        public ArrayList<Ingredient> getFinalList() {
+            return ingredientList;
         }
 
         public void updateIngredients() {

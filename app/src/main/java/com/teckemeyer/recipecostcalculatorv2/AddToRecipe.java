@@ -301,7 +301,7 @@ public class AddToRecipe extends AppCompatActivity {
                     break;
             }
 
-            String tempCost = String.format("%.2f", temp.getCost());
+            String tempCost = String.format("%.2f", temp.getCost() / (temp.getYield() / 100f));
             String tempString = "" + temp.getAmount() + "  " + temp.getUnit()
                     + " @ $" + tempCost;
 
