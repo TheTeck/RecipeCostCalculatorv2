@@ -5,7 +5,7 @@ package com.teckemeyer.recipecostcalculatorv2;
  */
 public class IngredientPortion {
 
-    private Ingredient mIngredient;
+    private long mIngredient;
     private int mUsedAmount;
     private int mUsedAmountDivider;
     private String mUsedUnit;
@@ -45,11 +45,11 @@ public class IngredientPortion {
         this.mUsedUnit = mUsedUnit;
     }
 
-    public Ingredient getIngredient() {
+    public long getIngredientID() {
         return mIngredient;
     }
 
-    public void setIngredient(Ingredient mIngredient) {
+    public void setIngredientID(long mIngredient) {
         this.mIngredient = mIngredient;
     }
 

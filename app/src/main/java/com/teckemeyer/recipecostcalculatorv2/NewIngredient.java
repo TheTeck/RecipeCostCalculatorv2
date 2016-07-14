@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class NewIngredient extends AppCompatActivity {
 
@@ -282,6 +283,10 @@ public class NewIngredient extends AppCompatActivity {
                 if (!mError){
                     // Create a new ingredient
                     Ingredient ingredient = new Ingredient();
+
+                    // Give each ingredient created an unique identifier
+                    Calendar cal = Calendar.getInstance();
+                    ingredient.setID(cal.getTimeInMillis());
 
                     mName = mName.toUpperCase();
 

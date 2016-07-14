@@ -21,6 +21,10 @@ public class Recipe {
     private static final String JSON_IP_NAME = "ip_name";
     private static final String JSON_IP_DESCRIPTION = "ip_description";
     private static final String JSON_IP_COST = "ip_cost";
+    private static final String JSON_IP_ID ="ip_id";
+    private static final String JSON_IP_UNIT = "ip_unit";
+    private static final String JSON_IP_AMOUNT = "ip_amount";
+    private static final String JSON_IP_DIVIDER = "ip_divider";
 
     // Constructors ////////////
 
@@ -43,8 +47,12 @@ public class Recipe {
             IngredientPortion temp = new IngredientPortion();
 
             temp.setName(jo.getString(JSON_IP_NAME + i));
-            temp.setCost((float)jo.getDouble(JSON_IP_COST + i));
+            temp.setCost((float) jo.getDouble(JSON_IP_COST + i));
             temp.setFullDescription(jo.getString(JSON_IP_DESCRIPTION + i));
+            temp.setIngredientID(jo.getLong(JSON_IP_ID + i));
+            temp.setUsedUnit(jo.getString(JSON_IP_UNIT + i));
+            temp.setUsedAmount(jo.getInt(JSON_IP_AMOUNT + i));
+            temp.setUsedAmountDivider(jo.getInt(JSON_IP_DIVIDER +i));
 
             mIngredients.add(temp);
         }
@@ -68,6 +76,10 @@ public class Recipe {
             jo.put(JSON_IP_NAME + looper, ip.getName());
             jo.put(JSON_IP_COST + looper, ip.getCost());
             jo.put(JSON_IP_DESCRIPTION + looper, ip.getFullDescription());
+            jo.put(JSON_IP_ID + looper, ip.getIngredientID());
+            jo.put(JSON_IP_UNIT + looper, ip.getUsedUnit());
+            jo.put(JSON_IP_AMOUNT + looper, ip.getUsedAmount());
+            jo.put(JSON_IP_DIVIDER + looper, ip.getUsedAmountDivider());
 
             looper++;
         }

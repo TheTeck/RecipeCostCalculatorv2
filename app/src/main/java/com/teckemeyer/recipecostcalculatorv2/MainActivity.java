@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -66,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        thePantry = Pantry.getInstance();
+        theIngredients = thePantry.getIngredients();
+
+        getIngredients();
+
         // Bind data to widgets
         mIngredientDatabase = (Button) findViewById(R.id.btnIngredientDatabase);
         mCreateRecipe = (Button) findViewById(R.id.btnCreateRecipe);
@@ -95,13 +101,16 @@ public class MainActivity extends AppCompatActivity {
         // Converts saved data to new schema
         if (!mUpdated) {
             JSONSerializer mSerializer;
-            ArrayList<OldIngredient> ingredientList = new ArrayList<>();
+            ArrayList<OldIngredient> ingredientList;
             ArrayList<Ingredient> newList = new ArrayList<>();
 
             mSerializer = new JSONSerializer("RecipeCostCalculatorData.json", MainActivity.this.getApplicationContext());
 
             try {
                 ingredientList = mSerializer.loadOldPantry();
+
+                Calendar cal = Calendar.getInstance();
+                long time = cal.getTimeInMillis();
 
                 for (int i = 0; i < ingredientList.size(); i++) {
                     Ingredient conversion = new Ingredient();
@@ -113,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     conversion.setUnit(ingredientList.get(i).getUnit());
                     conversion.setIcon(ingredientList.get(i).getIcon());
                     conversion.setYield(100);
+                    conversion.setID(time + i);
 
                     newList.add(conversion);
                 }
@@ -127,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             editor.putBoolean("updatedIngredient", true);
+        } else {
+            Toast.makeText(MainActivity.this, "Ingredients already converted", Toast.LENGTH_LONG).show();
         }
 
         mMessageCode = prefs.getInt("messageCode", 0);
@@ -361,10 +373,185 @@ public class MainActivity extends AppCompatActivity {
             // Set the values to the TextViews
             mRecipeName.setText(tempRecipe.getName());
 
+            Float theTotal = 0.00f;
+
+            for (IngredientPortion ip : tempRecipe.getIngredients()) {
+                theTotal += calculateIngredientCost(ip);
+            }
+
+            tempRecipe.setTotal(theTotal);
             String tempString = "$" + String.format("%.2f", tempRecipe.getTotal());
             mRecipeCost.setText(tempString);
 
             return view;
         }
+    }
+
+    public float calculateIngredientCost(IngredientPortion ip) {
+
+        Ingredient thisIngredient = null;
+
+        // Find the appropriate Ingredient from the pantry for this IngredientPortion
+        for (Ingredient anIngredient : theIngredients) {
+
+            if (anIngredient.getID() == ip.getIngredientID()) {
+                thisIngredient = anIngredient;
+                break;
+            }
+        }
+
+        if ( thisIngredient != null) {
+            // Calculates ingredients based in units
+            if (ip.getUsedUnit().equals("units")) {
+                // Cost per unit
+                float initialCost = ((float) thisIngredient.getCost() / ((float) thisIngredient.getYield() / 100f)) / thisIngredient.getAmount();
+                float newCost = initialCost * ip.getUsedAmount() / ip.getUsedAmountDivider();
+
+                return newCost;
+
+                // Calculates based on weight (imperial)
+            } else if (ip.getUsedUnit().equals("ounces") || ip.getUsedUnit().equals("pounds")) {
+                int divisor;
+                // Cost per ounce
+                if (thisIngredient.getUnit().equals("ounces")) {
+                    divisor = 1;
+                } else {
+                    divisor = 16;
+                }
+                float initialCost = ((float) thisIngredient.getCost() / ((float) thisIngredient.getYield() / 100f)) / (divisor * thisIngredient.getAmount());
+
+                int multiplier;
+                if (ip.getUsedUnit().equals("ounces")) {
+                    multiplier = 1;
+                } else {
+                    multiplier = 16;
+                }
+                float newCost = initialCost * ip.getUsedAmount() * multiplier / ip.getUsedAmountDivider();
+
+                return newCost;
+
+                // Calculates based on weight (metric)
+            } else if (ip.getUsedUnit().equals("milligrams") || ip.getUsedUnit().equals("grams") || ip.getUsedUnit().equals("kilograms")) {
+                int divisor;
+                // Cost per gram
+                if (thisIngredient.getUnit().equals("milligrams") || thisIngredient.getUnit().equals("grams")) {
+                    divisor = 1;
+                } else {
+                    divisor = 1000;
+                }
+
+                float initialCost = ((float) thisIngredient.getCost() / ((float) thisIngredient.getYield() / 100f)) / (divisor * thisIngredient.getAmount());
+
+                if (thisIngredient.getUnit().equals("milligrams")) {
+                    initialCost *= 1000;
+                }
+
+                Log.i("Initial Cost", String.valueOf(((float) thisIngredient.getCost() / ((float) thisIngredient.getYield() / 100f)) / (divisor * thisIngredient.getAmount())));
+
+                int multiplier;
+                if (ip.getUsedUnit().equals("milligrams") || ip.getUsedUnit().equals("grams")) {
+                    multiplier = 1;
+                } else {
+                    multiplier = 1000;
+                }
+                float newCost = initialCost * ip.getUsedAmount() * multiplier / ip.getUsedAmountDivider();
+
+                if (ip.getUsedUnit().equals("milligrams")) {
+                    newCost /= 1000;
+                }
+
+                if (newCost <= 0.01f) {
+                    newCost = 0.01f;
+                }
+
+                Log.i("New Cost", String.valueOf(initialCost * ip.getUsedAmount() * multiplier / ip.getUsedAmountDivider()));
+
+                return newCost;
+
+                // Calculates bases on volume
+            } else {
+                float divisor;
+                switch (thisIngredient.getUnit()) {
+                    case "liquid ounces":
+                        divisor = 1;
+                        break;
+                    case "teaspoons":
+                        divisor = 0.166667f;
+                        break;
+                    case "tablespoons":
+                        divisor = 0.5f;
+                        break;
+                    case "cups":
+                        divisor = 8;
+                        break;
+                    case "pints":
+                        divisor = 16;
+                        break;
+                    case "quarts":
+                        divisor = 32;
+                        break;
+                    case "milliliters":
+                        divisor = 0.033814f;
+                        break;
+                    case "liters":
+                        divisor = 33.814f;
+                        break;
+                    case "half-gallons":
+                        divisor = 64;
+                        break;
+                    case "gallons":
+                        divisor = 128;
+                        break;
+                    default:
+                        divisor = 1;
+                        break;
+                }
+                float initialCost = ((float) thisIngredient.getCost() / ((float) thisIngredient.getYield() / 100f)) / (divisor * thisIngredient.getAmount());
+                Log.i("Initial Cost", String.valueOf(((float) thisIngredient.getCost() / ((float) thisIngredient.getYield() / 100f)) / (divisor * thisIngredient.getAmount())));
+
+                float multiplier;
+                switch (ip.getUsedUnit()) {
+                    case "liquid ounces":
+                        multiplier = 1;
+                        break;
+                    case "teaspoons":
+                        multiplier = 0.166667f;
+                        break;
+                    case "tablespoons":
+                        multiplier = 0.5f;
+                        break;
+                    case "cups":
+                        multiplier = 8.11537f;
+                        break;
+                    case "pints":
+                        multiplier = 16;
+                        break;
+                    case "quarts":
+                        multiplier = 32;
+                        break;
+                    case "milliliters":
+                        multiplier = 0.033814f;
+                        break;
+                    case "liters":
+                        multiplier = 33.814f;
+                        break;
+                    case "half-gallons":
+                        multiplier = 64;
+                        break;
+                    case "gallons":
+                        multiplier = 128;
+                        break;
+                    default:
+                        multiplier = 1;
+                        break;
+                }
+                float newCost = initialCost * ip.getUsedAmount() * multiplier / ip.getUsedAmountDivider();
+
+                Log.i("New Cost", String.valueOf(initialCost * ip.getUsedAmount() * multiplier / ip.getUsedAmountDivider()));
+
+                return newCost;
+            }
+        }
+        return 0.00f;
     }
 }
