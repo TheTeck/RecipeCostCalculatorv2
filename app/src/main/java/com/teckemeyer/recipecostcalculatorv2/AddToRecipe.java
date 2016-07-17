@@ -89,6 +89,7 @@ public class AddToRecipe extends AppCompatActivity {
         mIngredientUsed.setUnit(theIngredients.get(0).getUnit());
         mIngredientUsed.setCost((float) theIngredients.get(0).getCost());
         mIngredientUsed.setYield(theIngredients.get(0).getYield());
+        mIngredientUsed.setID(theIngredients.get(0).getID());
 
         prefs = getSharedPreferences("Recipe Cost Calculator", MODE_PRIVATE);
 
@@ -146,7 +147,7 @@ public class AddToRecipe extends AppCompatActivity {
                 useIngredient.setUsedAmount(mIntAmountUsed);
                 useIngredient.setUsedAmountDivider(mADU);
                 useIngredient.setUsedUnit(mUnitUsed);
-                useIngredient.setIngredient(mIngredientUsed);
+                useIngredient.setIngredientID(mIngredientUsed.getID());
                 useIngredient.setName(mIngredientUsed.getName());
 
                 if (mADU != 1) {
