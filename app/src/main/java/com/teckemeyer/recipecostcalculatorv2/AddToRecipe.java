@@ -149,6 +149,7 @@ public class AddToRecipe extends AppCompatActivity {
                 useIngredient.setUsedUnit(mUnitUsed);
                 useIngredient.setIngredientID(mIngredientUsed.getID());
                 useIngredient.setName(mIngredientUsed.getName());
+                useIngredient.setIngredientID(mIngredientUsed.getID());
 
                 if (mADU != 1) {
                     dividerView = "/" + mADU;
@@ -175,6 +176,7 @@ public class AddToRecipe extends AppCompatActivity {
                 mIngredientUsed.setUnit(theIngredients.get(position).getUnit());
                 mIngredientUsed.setCost((float) theIngredients.get(position).getCost());
                 mIngredientUsed.setYield(theIngredients.get(position).getYield());
+                mIngredientUsed.setID(theIngredients.get(position).getID());
 
                 // Update the spinner with appropriate entries
                 tempString = mIngredientUsed.getUnit().trim();
@@ -304,7 +306,7 @@ public class AddToRecipe extends AppCompatActivity {
 
             String tempCost = String.format("%.2f", temp.getCost() / (temp.getYield() / 100f));
             String tempString = "" + temp.getAmount() + "  " + temp.getUnit()
-                    + " @ $" + tempCost;
+                    + " @ $" + tempCost + "  (" + temp.getYield() + "%";
 
             txtName.setText(temp.getName());
             txtDescription.setText(tempString);

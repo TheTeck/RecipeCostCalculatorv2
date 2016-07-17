@@ -367,6 +367,13 @@ public class MainActivity extends AppCompatActivity {
             // Set the values to the TextViews
             mRecipeName.setText(tempRecipe.getName());
 
+            tempRecipe.setTotal(0.00);
+
+            for (IngredientPortion ip : tempRecipe.getIngredients()) {
+                tempRecipe.setTotal(tempRecipe.getTotal() + tempRecipe.calculateIngredientCost(ip));
+            }
+
+
             String tempString = "$" + String.format("%.2f", tempRecipe.getTotal());
             mRecipeCost.setText(tempString);
 

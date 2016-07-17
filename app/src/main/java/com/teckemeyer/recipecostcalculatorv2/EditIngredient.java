@@ -57,7 +57,7 @@ public class EditIngredient extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_ingredient);
+        setContentView(R.layout.activity_edit_ingredient);
 
         final ImageView ivIcon1 = (ImageView) findViewById(R.id.ivIcon1);
         final ImageView ivIcon2 = (ImageView) findViewById(R.id.ivIcon2);
@@ -72,11 +72,10 @@ public class EditIngredient extends AppCompatActivity {
         final Button btnSubmit = (Button) findViewById(R.id.btnSubmit);
         Button btnCancel = (Button) findViewById(R.id.btnCancel);
         final ImageView ivYieldHelp = (ImageView) findViewById(R.id.yieldHelp);
-        final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         final TextView txtNameWarning = (TextView) findViewById(R.id.txtNameWarning);
         final TextView txtAmountWarning = (TextView) findViewById(R.id.txtAmountWarning);
         final TextView txtCostWarning = (TextView) findViewById(R.id.txtCostWarning);
-        TextView txtIcon = (TextView) findViewById(R.id.txtIcon);
+        final TextView txtUnit = (TextView) findViewById(R.id.unitText);
         mTxtName = (TextView) findViewById(R.id.txtName);
         mTxtAmount = (TextView) findViewById(R.id.txtAmount);
         mTxtUnit = (TextView) findViewById(R.id.txtUnit);
@@ -88,37 +87,22 @@ public class EditIngredient extends AppCompatActivity {
         mTxtAmount.setTypeface(typeFace);
         mTxtUnit.setTypeface(typeFace);
         mTxtCost.setTypeface(typeFace);
+        txtUnit.setTypeface(typeFace);
         btnCancel.setTypeface(typeFace);
         btnSubmit.setTypeface(typeFace);
 
-        // Fill the edit filed with the selected ingredient data
+        // Fill the edit field with the selected ingredient data
         etName.setText(selectedIngredient.getName());
         etAmount.setText(String.valueOf(selectedIngredient.getAmount()));
-        etCost.setText(String.valueOf(selectedIngredient.getCost()));
+        etCost.setText(String.format("%.2f", selectedIngredient.getCost()));
         etYield.setText(String.valueOf(selectedIngredient.getYield()));
+
+        txtUnit.setText(selectedIngredient.getUnit());
 
         // Hide the warnings here
         txtNameWarning.setVisibility(View.INVISIBLE);
         txtAmountWarning.setVisibility(View.INVISIBLE);
         txtCostWarning.setVisibility(View.INVISIBLE);
-
-        // Initialize the spinner
-        spinner.setSelection(getIndex(spinner, selectedIngredient.getUnit()));
-
-        // Handle the spinner
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#fecd7e"));
-                mUnit = String.valueOf(spinner.getSelectedItem());
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Nothing Yet
-            }
-        });
 
         // Initial icon selection
         ivIcon1.setAlpha(mAlpha);

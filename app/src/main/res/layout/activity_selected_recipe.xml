@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center"
-            android:layout_weight=".2">
+            android:layout_weight=".15">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -45,12 +45,48 @@
                 android:layout_marginBottom="10dp" />
         </LinearLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".1">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/my_gradient2"
+                android:id="@+id/relativeLayout3"
+                android:layout_marginRight="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ivAddIngredient"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/ic_add_circle_outline_white_24dp"
+                    android:padding="4dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/add_to_recipe"
+                android:id="@+id/txtAddIngredient"
+                android:paddingBottom="4dp"
+                android:textColor="#ffffff"
+                android:layout_alignBottom="@+id/relativeLayout3"
+                android:layout_toEndOf="@+id/relativeLayout3" />
+        </RelativeLayout>
+
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:id="@+id/listViewSeletedRecipe"
             android:choiceMode="none"
-            android:layout_weight=".675" />
+            android:layout_weight=".625" />
 
         <RelativeLayout
             android:layout_width="match_parent"

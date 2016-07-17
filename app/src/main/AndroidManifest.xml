@@ -49,9 +49,14 @@
             android:name=".YieldInfo"
             android:label="What is &apos;Yield&apos;?"
             android:screenOrientation="portrait" />
-        <activity android:name=".EditIngredient"
+        <activity
+            android:name=".EditIngredient"
             android:label="Edit Ingredient"
             android:parentActivityName=".IngredientDatabase"
+            android:screenOrientation="portrait" />
+        <activity android:name=".EditUsedIngredient"
+            android:label="Edit Ingredient Usage"
+            android:parentActivityName=".SelectedRecipe"
             android:screenOrientation="portrait" />
     </application>
 

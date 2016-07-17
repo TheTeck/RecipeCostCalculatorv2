@@ -76,6 +76,7 @@ public class NewIngredient extends AppCompatActivity {
         mTxtCost.setTypeface(typeFace);
         btnCancel.setTypeface(typeFace);
         btnSubmit.setTypeface(typeFace);
+        txtIcon.setTypeface(typeFace);
 
         Pantry thePantry = Pantry.getInstance();
         final ArrayList<Ingredient> theIngredients = thePantry.getIngredients();
