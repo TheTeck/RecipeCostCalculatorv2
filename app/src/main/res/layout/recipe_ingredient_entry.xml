@@ -1,47 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent" android:layout_height="wrap_content"
-    android:padding="15dp"
-    android:background="@drawable/my_gradient4">
+    android:background="@drawable/my_gradient4"
+    android:paddingLeft="5dp">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/imageViewIngredientIcon"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@drawable/ic_meat" />
+        android:src="@drawable/ic_meat"
+        android:layout_marginRight="15dp" />
 
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/txtThisIngredient"
-        android:layout_alignTop="@+id/imageViewIngredientIcon"
-        android:layout_toRightOf="@+id/imageViewIngredientIcon"
-        android:layout_toEndOf="@+id/imageViewIngredientIcon"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:textColor="#fecd7e" />
+        android:gravity="left|center"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/imageViewIngredientIcon">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="IngredientDescription"
-        android:id="@+id/txtIngredientDescription"
-        android:layout_alignBottom="@+id/imageViewIngredientIcon"
-        android:layout_alignLeft="@+id/txtThisIngredient"
-        android:layout_alignStart="@+id/txtThisIngredient"
-        android:textColor="#ffffff" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Large Text"
+            android:id="@+id/txtThisIngredient"
+            android:layout_alignTop="@+id/imageViewIngredientIcon"
+            android:layout_toRightOf="@+id/imageViewIngredientIcon"
+            android:layout_toEndOf="@+id/imageViewIngredientIcon"
+            android:textColor="#fecd7e" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="IngredientDescription"
+            android:id="@+id/txtIngredientDescription"
+            android:layout_alignBottom="@+id/imageViewIngredientIcon"
+            android:layout_alignLeft="@+id/txtThisIngredient"
+            android:layout_alignStart="@+id/txtThisIngredient"
+            android:textColor="#ffffff" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/imageViewIngredientIcon"></RelativeLayout>
+        android:layout_alignBottom="@+id/imageViewIngredientIcon"
+        android:id="@+id/relativeLayout4"
+        android:layout_below="@+id/imageViewIngredientIcon"></RelativeLayout>
 </RelativeLayout>

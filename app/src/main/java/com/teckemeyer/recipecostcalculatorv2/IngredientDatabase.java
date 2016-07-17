@@ -116,7 +116,6 @@ public class IngredientDatabase extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 EditIngredient.setSelected(mIngredientAdapter.getFinalList().get(position));
-                Toast.makeText(IngredientDatabase.this, "EditIngredient.setSelected() called with (" + position + ")", Toast.LENGTH_SHORT).show();
 
                 intent = new Intent(IngredientDatabase.this, EditIngredient.class);
                 startActivity(intent);

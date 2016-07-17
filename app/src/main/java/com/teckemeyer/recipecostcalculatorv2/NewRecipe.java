@@ -103,6 +103,11 @@ public class NewRecipe extends AppCompatActivity {
 
                     if (!error) {
                         Recipe thisRecipe = new Recipe();
+                        if (mName.getText().length() > 25) {
+                            String theName = mName.getText().toString();
+                            mName.setText(theName.substring(0,24));
+                        }
+
                         thisRecipe.setName(mName.getText().toString().trim().toUpperCase());
 
                         float recipeTotal = 0;

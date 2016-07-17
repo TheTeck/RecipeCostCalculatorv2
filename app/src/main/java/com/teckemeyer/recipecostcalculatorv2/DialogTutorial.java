@@ -44,13 +44,13 @@ public class DialogTutorial extends DialogFragment {
                 txtMessage.setText("Welcome to the Recipe Cost Calculator!\nHere you can store any ingredients you want and reuse them in all of your recipes!\n\nThis screen is where you can view all the of the recipes that you have created...\nBut before you can create any recipes, you must put some ingredients into your pantry!");
                 break;
             case 1:
-                txtMessage.setText("Now this is the \"Pantry\" where you will can create and store all of your ingredients to use in recipes.\n\nLet's create an ingredient now by clicking on \"Create Ingredient\" above.");
+                txtMessage.setText("Now this is the \"Pantry\" where you can create and store all of your ingredients to use in recipes.\n\nLet's create an ingredient now by clicking on \"Create Ingredient\" above.");
                 break;
             case 2:
                 txtMessage.setText("Time to create a new ingredient...\n\nthis is where you specify how much of the ingredient you have in bulk and how much it costs.\n\nBe sure to select the right units here. It can by measured by weight, volume or just number of units.");
                 break;
             case 3:
-                txtMessage.setText("Great! You now have one ingredient in your pantry you can use in any of your recipes.\n\nFYI: If you no longer want this ingredient in your Pantry, simply hold down on it and it will be deleted.\n\n\nNow let's go back to our recipes...");
+                txtMessage.setText("Great! You now have one ingredient in your pantry you can use in any of your recipes.\n\nFYI: You can modify any ingredient here by clicking on it. Any modifications will be reflected in the recipes that use it.\n\n\nNow let's go back to our recipes...");
                 break;
             case 4:
                 txtMessage.setText("This screen is looking a little lonely... let's make our first recipe! Just click on \"Create Recipe\" below.");
@@ -62,10 +62,10 @@ public class DialogTutorial extends DialogFragment {
                 txtMessage.setText("You will find all of your ingredients from the Pantry here. Select one and how much of it you are using in your recipe.\n\nAgain, be sure to select the correct units.");
                 break;
             case 7:
-                txtMessage.setText("Now your recipe has one ingredient!\n\nYou can add more or delete any ingredients you want here.\nYou can also see that there is already a running total for the cost of your ingredients.\n\nOnce done, just give your recipe a name and submit it.");
+                txtMessage.setText("Now your recipe has one ingredient!\n\nYou can add more or delete any ingredients you want here by holding down on it.\nYou can also see that there is already a running total for the cost of your ingredients.\n\nOnce done, just give your recipe a name and submit it.");
                 break;
             case 8:
-                txtMessage.setText("That's it! You created your first recipe! Now you can click on it and see the ingredients and how much they cost.\nPretty straight forward stuff here!\n\nAlso, like in the Pantry, if you want to get rid of a recipe, just hold down on the recipe and it's gone.\n\nThat's pretty much all there is to it. Thanks for downloading!");
+                txtMessage.setText("That's it! You created your first recipe! Now you can click on it and view, edit, delete and add ingredients to your recipe.\nPretty straight forward stuff here!\n\nAlso, if you don't want a recipe anymore, just hold down on it and it's gone.\n\nThat's pretty much all there is to it. Thanks for downloading!");
                 break;
             default:
                 txtMessage.setText("Something didn't work here :(");

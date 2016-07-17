@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         // Converts saved data to new schema
         if (!mUpdated) {
             JSONSerializer mSerializer;
-            ArrayList<OldIngredient> ingredientList = new ArrayList<>();
+            ArrayList<OldIngredient> ingredientList;
             ArrayList<Ingredient> newList = new ArrayList<>();
 
             mSerializer = new JSONSerializer("RecipeCostCalculatorData.json", MainActivity.this.getApplicationContext());
@@ -298,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Recipe> finalRecipes = new ArrayList<>();
 
         public BookAdapter() {
-            mSerializer = new JSONSerializer("RecipeBook.json", MainActivity.this.getApplicationContext());
+            mSerializer = new JSONSerializer("NewRecipeBook.json", MainActivity.this.getApplicationContext());
 
             try {
                 finalRecipes = mSerializer.loadBook();

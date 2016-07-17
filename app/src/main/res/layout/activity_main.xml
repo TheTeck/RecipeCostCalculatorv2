@@ -141,8 +141,7 @@
         android:text="@string/boogscorcher"
         android:id="@+id/txtCompany"
         android:textColor="#c794e5"
-        android:layout_above="@+id/layoutButtons"
-        android:layout_alignRight="@+id/txtBookWarning"
-        android:layout_alignEnd="@+id/txtBookWarning" />
+        android:layout_alignBottom="@+id/listViewBook"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
