@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class NewIngredient extends AppCompatActivity {
 
@@ -283,6 +284,9 @@ public class NewIngredient extends AppCompatActivity {
                     // Create a new ingredient
                     Ingredient ingredient = new Ingredient();
 
+                    Calendar cal = Calendar.getInstance();
+                    long rightNow = cal.getTimeInMillis();
+
                     mName = mName.toUpperCase();
 
                     ingredient.setUnit(mUnit);
@@ -292,6 +296,7 @@ public class NewIngredient extends AppCompatActivity {
                     ingredient.setName(mName);
                     ingredient.setCost(mCost);
                     ingredient.setYield(mYield);
+                    ingredient.setID(rightNow);
 
                     theIngredients.add(ingredient);
 

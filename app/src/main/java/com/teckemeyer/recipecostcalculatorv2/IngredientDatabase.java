@@ -98,7 +98,8 @@ public class IngredientDatabase extends AppCompatActivity {
         mAddText.setTypeface(typeFace);
         mReturn.setTypeface(typeFace);
 
-        // Handle long click on list items
+
+        /* Handle long click on list items
         mList.setLongClickable(true);
 
         mList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -108,7 +109,7 @@ public class IngredientDatabase extends AppCompatActivity {
                 mIngredientAdapter.deleteIngredient(position);
                 return true;
             }
-        });
+        }); */
 
         // Handle click on list item to edit ingredient
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

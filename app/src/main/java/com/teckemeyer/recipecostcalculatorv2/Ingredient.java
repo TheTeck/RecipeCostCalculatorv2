@@ -16,6 +16,7 @@ public class Ingredient {
     private int mIcon = 1;
     private double mCost = 1f;
     private int mYield = 100;
+    private long mID;
 
     private static final String JSON_INGREDIENT_NAME = "ingredient_name";
     private static final String JSON_INGREDIENT_UNIT = "ingredient_unit";
@@ -24,6 +25,7 @@ public class Ingredient {
     private static final String JSON_INGREDIENT_ICON = "ingredient_icon";
     private static final String JSON_INGREDIENT_COST = "ingredient_cost";
     private static final String JSON_INGREDIENT_YIELD = "ingredient_yield";
+    private static final String JSON_INGREDIENT_ID = "ingredient_id";
 
     // Constructors
 
@@ -36,6 +38,7 @@ public class Ingredient {
         mIcon = jo.getInt(JSON_INGREDIENT_ICON);
         mCost = jo.getDouble(JSON_INGREDIENT_COST);
         mYield = jo.getInt(JSON_INGREDIENT_YIELD);
+        mID = jo.getLong(JSON_INGREDIENT_ID);
 
     }
 
@@ -57,6 +60,7 @@ public class Ingredient {
         jo.put(JSON_INGREDIENT_AMOUNT, mAmount);
         jo.put(JSON_INGREDIENT_AMOUNT_DIVIDER, mAmountDivider);
         jo.put(JSON_INGREDIENT_YIELD, mYield);
+        jo.put(JSON_INGREDIENT_ID, mID);
 
         return jo;
     }
@@ -115,5 +119,13 @@ public class Ingredient {
 
     public void setYield(int mYield) {
         this.mYield = mYield;
+    }
+
+    public long getID() {
+        return mID;
+    }
+
+    public void setID(long mID) {
+        this.mID = mID;
     }
 }

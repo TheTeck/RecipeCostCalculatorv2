@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -103,16 +104,21 @@ public class MainActivity extends AppCompatActivity {
             try {
                 ingredientList = mSerializer.loadOldPantry();
 
+                // Adds a unique ID value to the converted ingredients
+                Calendar cal = Calendar.getInstance();
+                long rightNow = cal.getTimeInMillis();
+
                 for (int i = 0; i < ingredientList.size(); i++) {
                     Ingredient conversion = new Ingredient();
 
                     conversion.setName(ingredientList.get(i).getName());
                     conversion.setAmount(ingredientList.get(i).getAmount());
                     conversion.setAmountDivider(ingredientList.get(i).getAmountDivider());
-                    conversion.setCost((float)ingredientList.get(i).getCost());
+                    conversion.setCost((float) ingredientList.get(i).getCost());
                     conversion.setUnit(ingredientList.get(i).getUnit());
                     conversion.setIcon(ingredientList.get(i).getIcon());
                     conversion.setYield(100);
+                    conversion.setID(rightNow + i);
 
                     newList.add(conversion);
                 }
