@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,6 +106,44 @@ public class IngredientDatabase extends AppCompatActivity {
         mList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                JSONSerializer mSerializer;
+                ArrayList<Recipe> allRecipes = new ArrayList<>();
+
+                mSerializer = new JSONSerializer("NewRecipeBook.json", IngredientDatabase.this.getApplicationContext());
+
+                try {
+                    allRecipes = mSerializer.loadBook();
+                } catch (Exception e) {
+                    Log.e("Error loading recipes: ", "" + e);
+                }
+
+                ArrayList<IngredientPortion> tempIPList = new ArrayList<>();
+
+                // Go through all the recipes
+                for (Recipe r : allRecipes) {
+
+                    // Go through all the ingredients used in each recipe
+                    for (IngredientPortion ip : r.getIngredients()) {
+
+                        // If used ingredient is not the same as this deleted ingredient...
+                        if (ip.getIngredientID() != theIngredients.get(position).getID()) {
+                            //... save it
+                            tempIPList.add(ip);
+                            Log.e("Saved ingredients: ", "" + ip.getName());
+                        }
+                    }
+
+                    r.setIngredients(tempIPList);
+                    tempIPList.clear();
+                }
+
+                try {
+                    mSerializer.saveBook(allRecipes);
+                } catch (Exception e) {
+                    Log.e("Error saving recipes: ", "" + e);
+                }
+
                 view.startAnimation(mLeftOut);
                 mIngredientAdapter.deleteIngredient(position);
                 return true;

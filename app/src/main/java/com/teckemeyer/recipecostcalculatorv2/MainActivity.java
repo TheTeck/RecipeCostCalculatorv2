@@ -183,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
         mList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
                 view.setAnimation(mLeftOut);
                 bookAdapter.deleteRecipe(position);
                 return true;
@@ -194,12 +193,39 @@ public class MainActivity extends AppCompatActivity {
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SelectedRecipe.setSelected(bookAdapter.getFinalList().get(position));
+                adjustRecipe(position);
 
                 intent = new Intent(MainActivity.this, SelectedRecipe.class);
                 startActivity(intent);
             }
         });
+    }
+
+    public void adjustRecipe(int position) {
+
+
+        Recipe thisRecipe = bookAdapter.getFinalList().get(position);
+
+        ArrayList<IngredientPortion> tempIPList = new ArrayList<>();
+
+        for (IngredientPortion ip : thisRecipe.getIngredients()) {
+
+            boolean isAlive = false;
+
+            for (Ingredient ing : theIngredients) {
+                if (ing.getID() == ip.getIngredientID()) {
+                    isAlive = true;
+                }
+            }
+            
+            if (isAlive) {
+                tempIPList.add(ip);
+            }
+        }
+
+        thisRecipe.setIngredients(tempIPList);
+
+        SelectedRecipe.setSelected(thisRecipe);
     }
 
     @Override
@@ -298,6 +324,10 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Recipe> finalRecipes = new ArrayList<>();
 
         public BookAdapter() {
+           loadRecipes();
+        }
+
+        public void loadRecipes() {
             mSerializer = new JSONSerializer("NewRecipeBook.json", MainActivity.this.getApplicationContext());
 
             try {
@@ -306,6 +336,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("Error loading recipes: ", "" + e);
             }
         }
+
 
         public void saveRecipes() {
 
