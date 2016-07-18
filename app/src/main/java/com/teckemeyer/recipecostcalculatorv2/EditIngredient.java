@@ -298,6 +298,7 @@ public class EditIngredient extends AppCompatActivity {
 
                 if (!mError) {
                     mName = mName.toUpperCase();
+                    mUnit = txtUnit.getText().toString();
 
                     selectedIngredient.setUnit(mUnit);
                     selectedIngredient.setAmount(mAmount);

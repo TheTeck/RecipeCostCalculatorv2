@@ -369,7 +369,9 @@ public class MainActivity extends AppCompatActivity {
 
             tempRecipe.setTotal(0.00);
 
-            for (IngredientPortion ip : tempRecipe.getIngredients()) {
+            ArrayList<IngredientPortion> ipList = tempRecipe.getIngredients();
+
+            for (IngredientPortion ip : ipList) {
                 tempRecipe.setTotal(tempRecipe.getTotal() + tempRecipe.calculateIngredientCost(ip));
             }
 
