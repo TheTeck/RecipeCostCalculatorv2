@@ -1,6 +1,8 @@
 package com.teckemeyer.recipecostcalculatorv2;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -107,47 +109,76 @@ public class IngredientDatabase extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                JSONSerializer mSerializer;
-                ArrayList<Recipe> allRecipes = new ArrayList<>();
+                final int pos = position;
+                final View theView = view;
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        IngredientDatabase.this);
+                alert.setTitle("Delete Ingredient");
+                alert.setMessage("Are you sure you want to delete this ingredient? It will be removed from any recipe that uses it.");
+                alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
-                mSerializer = new JSONSerializer("NewRecipeBook.json", IngredientDatabase.this.getApplicationContext());
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                try {
-                    allRecipes = mSerializer.loadBook();
-                } catch (Exception e) {
-                    Log.e("Error loading recipes: ", "" + e);
-                }
+                        JSONSerializer mSerializer;
+                        ArrayList<Recipe> allRecipes = new ArrayList<>();
 
-                ArrayList<IngredientPortion> tempIPList = new ArrayList<>();
+                        mSerializer = new JSONSerializer("NewRecipeBook.json", IngredientDatabase.this.getApplicationContext());
 
-                // Go through all the recipes
-                for (Recipe r : allRecipes) {
-
-                    // Go through all the ingredients used in each recipe
-                    for (IngredientPortion ip : r.getIngredients()) {
-
-                        // If used ingredient is not the same as this deleted ingredient...
-                        if (ip.getIngredientID() != theIngredients.get(position).getID()) {
-                            //... save it
-                            tempIPList.add(ip);
-                            Log.e("Saved ingredients: ", "" + ip.getName());
+                        try {
+                            allRecipes = mSerializer.loadBook();
+                        } catch (Exception e) {
+                            Log.e("Error loading recipes: ", "" + e);
                         }
+
+                        ArrayList<IngredientPortion> tempIPList = new ArrayList<>();
+
+                        // Go through all the recipes
+                        for (Recipe r : allRecipes) {
+
+                            // Go through all the ingredients used in each recipe
+                            for (IngredientPortion ip : r.getIngredients()) {
+
+                                // If used ingredient is not the same as this deleted ingredient...
+                                if (ip.getIngredientID() != theIngredients.get(pos).getID()) {
+                                    //... save it
+                                    tempIPList.add(ip);
+                                    Log.e("Saved ingredients: ", "" + ip.getName());
+                                }
+                            }
+
+                            r.setIngredients(tempIPList);
+                            tempIPList.clear();
+                        }
+
+                        try {
+                            mSerializer.saveBook(allRecipes);
+                        } catch (Exception e) {
+                            Log.e("Error saving recipes: ", "" + e);
+                        }
+
+                        theView.startAnimation(mLeftOut);
+                        mIngredientAdapter.deleteIngredient(pos);
+
+                        dialog.dismiss();
+
                     }
+                });
+                alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
 
-                    r.setIngredients(tempIPList);
-                    tempIPList.clear();
-                }
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                try {
-                    mSerializer.saveBook(allRecipes);
-                } catch (Exception e) {
-                    Log.e("Error saving recipes: ", "" + e);
-                }
+                        dialog.dismiss();
+                    }
+                });
 
-                view.startAnimation(mLeftOut);
-                mIngredientAdapter.deleteIngredient(position);
+                alert.show();
+
                 return true;
             }
+
+
         });
 
         // Handle click on list item to edit ingredient

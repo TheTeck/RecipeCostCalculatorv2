@@ -1,6 +1,9 @@
 package com.teckemeyer.recipecostcalculatorv2;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     Typeface typeFace;
     ImageView mCredits;
     boolean mUpdated;
+    boolean mDelete;
 
     private int mMessageCode;
 
@@ -183,8 +187,35 @@ public class MainActivity extends AppCompatActivity {
         mList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                view.setAnimation(mLeftOut);
-                bookAdapter.deleteRecipe(position);
+
+                final int pos = position;
+                final View theView = view;
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        MainActivity.this);
+                alert.setTitle("Delete Recipe");
+                alert.setMessage("Are you sure you want to delete this recipe?");
+                alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        theView.setAnimation(mLeftOut);
+                        bookAdapter.deleteRecipe(pos);
+                        dialog.dismiss();
+
+                    }
+                });
+                alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                });
+
+                alert.show();
+
                 return true;
             }
         });
@@ -217,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                     isAlive = true;
                 }
             }
-            
+
             if (isAlive) {
                 tempIPList.add(ip);
             }
