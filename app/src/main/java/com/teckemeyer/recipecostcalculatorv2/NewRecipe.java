@@ -380,7 +380,7 @@ public class NewRecipe extends AppCompatActivity {
                             multiplier = 0.5f;
                             break;
                         case "cups":
-                            multiplier = 8.11537f;
+                            multiplier = 8;
                             break;
                         case "pints":
                             multiplier = 16;
